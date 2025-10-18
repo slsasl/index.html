@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>01 TPLP 018 — Kelas</title>
+
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+         :root {
+            --bg1: #2b2f6b;
+            --bg2: #0f3550;
+            --card: rgba(255, 255, 255, 0.06);
+            --accent: #2bd1c6;
+            --glass: rgba(255, 255, 255, 0.06);
+            --muted: rgba(255, 255, 255, 0.7);
+            --radius: 14px;
+            --pad: 16px;
+        }
+        
+        * {
+            box-sizing: border-box
+        }
+        
+        body {
+            margin: 0;
+            font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+            background: linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 100%);
+            color: #fff;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        /* container to mimic mobile phone ratio */
+        
+        .phone {
+            width: 380px;
+            max-width: 96vw;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(0, 0, 0, 0.04));
+            border-radius: 28px;
+            padding: 18px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+        }
+        
+        header {
+            text-align: center;
+            padding: 4px 8px 12px 8px;
+        }
+        
+        .grade {
+            font-weight: 700;
+            font-size: 32px;
+            letter-spacing: 2px;
+            margin: 0;
+        }
+        
+        .school {
+            margin-top: 6px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+            opacity: 0.95;
+        }
+        /* banner */
+        
+        .banner {
+            margin: 12px 0;
+            border-radius: 14px;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+        }
+        
+        .banner img {
+            width: 100%;
+            display: block;
+            height: 140px;
+            object-fit: cover;
+            filter: contrast(95%) saturate(110%);
+        }
+        
+        .banner .overlay {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.45));
+            text-align: center;
+            padding: 10px;
+        }
+        
+        .banner .overlay h2 {
+            margin: 0;
+            font-size: 36px;
+            font-weight: 800;
+            letter-spacing: 4px;
+        }
+        
+        .banner .overlay p {
+            margin: 4px 0 0;
+            font-size: 12px;
+            letter-spacing: 4px;
+            opacity: 0.9;
+        }
+        /* cards grid */
+        
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-top: 14px;
+        }
+        
+        .card {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+            border-radius: 14px;
+            padding: 14px;
+            min-height: 84px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 6px 18px rgba(2, 6, 23, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            transition: transform .18s ease, box-shadow .18s ease;
+            cursor: pointer;
+        }
+        
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+        }
+        
+        .card .top {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.25);
+            flex-shrink: 0;
+        }
+        
+        .title {
+            font-weight: 700;
+            font-size: 15px;
+            margin: 0;
+        }
+        
+        .subtitle {
+            font-size: 13px;
+            color: var(--muted);
+            margin-top: 6px;
+        }
+        
+        .action {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--accent);
+            margin-top: 6px;
+        }
+        /* bottom bar */
+        
+        .bottom {
+            margin-top: 18px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+        
+        .bottom .btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 14px;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 14px;
+            background: transparent;
+            color: #fff;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .bottom .center {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
+        }
+        /* modal */
+        
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.55);
+            z-index: 60;
+        }
+        
+        .modal {
+            width: min(420px, 92vw);
+            background: linear-gradient(180deg, #0b2540, #082238);
+            border-radius: 12px;
+            padding: 16px;
+            color: #fff;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+        }
+        
+        .modal h3 {
+            margin: 0 0 8px 0;
+            font-size: 18px
+        }
+        
+        .members {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        
+        .member {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 8px 10px;
+            border-radius: 10px;
+            font-size: 13px;
+        }
+        /* small screens tweak */
+        
+        @media (max-width:380px) {
+            .grade {
+                font-size: 28px
+            }
+            .banner img {
+                height: 120px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="phone" role="application" aria-label="Kelas XII IPA 2">
+        <header>
+            <p class="grade">01 TPLP 018</p>
+            <p class="school">AXIOMATIC018</p>
+        </header>
+
+        <!-- banner -->
+        <section class="banner" aria-hidden="false">
+            <!-- placeholder image, you can replace src with real class photo -->
+            <img src="https://vui.unsplash.com/resize?height=256&quality=60&type=auto&url=https%3A%2F%2Fsearched-images.s3.us-west-2.amazonaws.com%2Ffcd40ecb-b1a8-4340-9a99-74ee510164c2%3FX-Amz-Algorithm%3DAWS4-HMAC-SHA256%26X-Amz-Credential%3DAKIAQ4GRIA4QQ7L7GEOH%252F20251017%252Fus-west-2%252Fs3%252Faws4_request%26X-Amz-Date%3D20251017T115305Z%26X-Amz-Expires%3D86400%26X-Amz-SignedHeaders%3Dhost%26X-Amz-Signature%3D1c9e3f70a62ec4b39aa7e6fc514c098265e29441e77ae26f1d68800736e45d81&sign=0Hf14iZqn460yoi8ZAC3wAzRgzNgKSMZBnmO_w7j7c0"
+                alt="Foto Kelas">
+            <div class="overlay">
+                <h2>WELCOME</h2>
+                <p>EVERYONE</p>
+            </div>
+        </section>
+
+        <!-- grid cards -->
+        <main>
+            <div class="grid">
+                <div class="card" id="btn-instagram" role="button" tabindex="0" aria-pressed="false">
+                    <div class="top">
+                        <div class="icon" aria-hidden="true">
+                            <!-- instagram svg -->
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.5" y2="6.51"></line></svg>
+                        </div>
+                        <div>
+                            <div class="title">Instagram Kami</div>
+                            <div class="subtitle">Follow & lihat posting</div>
+                        </div>
+                    </div>
+                    <div class="action">Kunjungi →</div>
+                </div>
+
+                <div class="card" id="btn-members" role="button" tabindex="0" aria-pressed="false">
+                    <div class="top">
+                        <div class="icon" aria-hidden="true">
+                            <!-- members icon -->
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.6"><path d="M17 21v-2a4 4 0 0 0-3-3.87"></path><path d="M7 21v-2a4 4 0 0 1 3-3.87"></path><path d="M12 7a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" transform="translate(0,8)"></path></svg>
+                        </div>
+                        <div>
+                            <div class="title">Anggota Kelas</div>
+                            <div class="subtitle">Daftar anggota</div>
+                        </div>
+                    </div>
+                    <div class="action">Lihat →</div>
+                </div>
+
+                <div class="card" id="btn-tiktok" role="button" tabindex="0" aria-pressed="false">
+                    <div class="top">
+                        <div class="icon" aria-hidden="true">
+                            <!-- tiktok icon simplified -->
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.6"><path d="M9 9v6a3 3 0 1 0 3-3V3h3"></path></svg>
+                        </div>
+                        <div>
+                            <div class="title">Tiktok Kami</div>
+                            <div class="subtitle">Video & kreativitas</div>
+                        </div>
+                    </div>
+                    <div class="action">Kunjungi →</div>
+                </div>
+
+                <div class="card" id="btn-anon" role="button" tabindex="0" aria-pressed="false">
+                    <div class="top">
+                        <div class="icon" aria-hidden="true">
+                            <!-- paper plane -->
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.6"><path d="M22 2L11 13"></path><path d="M22 2l-7 20-4-9-9-4 20-7z"></path></svg>
+                        </div>
+                        <div>
+                            <div class="title">Pesan Anonim</div>
+                            <div class="subtitle">Kirim pesan tanpa nama</div>
+                        </div>
+                    </div>
+                    <div class="action">Mulai →</div>
+                </div>
+            </div>
+        </main>
+
+        <!-- bottom bar -->
+        <div class="bottom" role="navigation" aria-label="Navigasi bawah">
+            <button class="btn" id="open-gallery" aria-label="Gallery">
+        <!-- gallery icon -->
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M8 14l2.5-3 1.5 2 2.5-3 3 4"></path></svg>
+        <span style="opacity:0.95">Gallery</span>
+      </button>
+
+            <div class="center" title="Menu tengah">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.6"><circle cx="12" cy="12" r="1.8"/><circle cx="7" cy="12" r="1.8"/><circle cx="17" cy="12" r="1.8"/></svg>
+            </div>
+
+            <button class="btn" id="open-schedule" aria-label="Jadwal">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.4"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line></svg>
+        <span style="opacity:0.95">Jadwal</span>
+      </button>
+        </div>
+    </div>
+
+    <!-- modal backdrop -->
+    <div class="modal-backdrop" id="modal-backdrop" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="modal" role="document">
+            <h3 id="modal-title">Judul</h3>
+            <div id="modal-content">
+                <!-- dynamic content -->
+            </div>
+            <div style="display:flex;justify-content:flex-end;margin-top:12px;gap:8px">
+                <button id="modal-close" style="background:transparent;border:1px solid rgba(255,255,255,0.08); color:#fff;padding:8px 12px;border-radius:8px;cursor:pointer">Tutup</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- small inline scripts -->
+    <script>
+        // sample data (ganti sesuai kebutuhan)
+        const instagramUrl = "https://www.instagram.com/axiomatic018?igsh=bGR1ZjBocTl0ZGk3/";
+        const tiktokUrl = "https://www.tiktok.com/@axiomatics18?_t=ZS-90clUJo18wk&_r=1/";
+        const members = [
+            "ABDULLAH TSAQIF ALKHAIRY", "AHMAD FATHIR RAMADHAN", "ANDREA NOVA FITRIANI", "AXEL FABIAN", "CHRISTIAN YOHANES MANTIRI", "EKA DIAH AYU KINANTI", "FARIDHO ALZUHRY", "FATIH RAMADHAN ARIZLY",
+            "FAUDZUL ADZIM ILHAMDHE", "GALUH FAHRIYANTO", "HAIKAL BADRI SIRAZ", "IRFAN KHRISMAWAN", "KARLA ARAMITHA RAHMADHANI", "KEMAL ALGHIFFARY SETIAWAN", "LINGGA PUTRA DELVANTIWI", "MUHAMAD SHAFWAN",
+            "MUHAMMAD AGIL TURADA"
+        ];
+        const schedule = [{
+            day: 'Senin',
+            subjects: 'Algoritma Dan Pemrograman 1, Pendidikan Agama, Pendidikan Pancasila'
+        }, {
+            day: 'Selasa',
+            subjects: 'Kalkulus 1, Basic Academic English'
+        }, {
+            day: 'Rabu',
+            subjects: 'Logika Informatik, Pengantar Teknologi Informasi, Fisika Dasar'
+        }];
+
+        // helpers
+        function openModal(title, html) {
+            const bd = document.getElementById('modal-backdrop');
+            document.getElementById('modal-title').textContent = title;
+            document.getElementById('modal-content').innerHTML = html;
+            bd.style.display = 'flex';
+            bd.setAttribute('aria-hidden', 'false');
+        }
+
+        function closeModal() {
+            const bd = document.getElementById('modal-backdrop');
+            bd.style.display = 'none';
+            bd.setAttribute('aria-hidden', 'true');
+        }
+
+        // buttons
+        document.getElementById('btn-instagram').addEventListener('click', () => {
+            window.open(instagramUrl, '_blank');
+        });
+        document.getElementById('btn-tiktok').addEventListener('click', () => {
+            window.open(tiktokUrl, '_blank');
+        });
+
+        // members modal
+        document.getElementById('btn-members').addEventListener('click', () => {
+            const list = members.map(m => `<div class="member">${m}</div>`).join('');
+            openModal('Anggota Kelas', `<div class="members">${list}</div>`);
+        });
+
+        // anonymous message
+        document.getElementById('btn-anon').addEventListener('click', () => {
+            const form = `
+        <form id="anon-form" style="display:flex;flex-direction:column;gap:8px">
+          <label style="font-size:13px;color:rgba(255,255,255,0.9)">Tulis pesan (anonim)</label>
+          <textarea name="msg" required rows="4" style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:#fff"></textarea>
+          <div style="display:flex;gap:8px;justify-content:flex-end">
+            <button type="button" id="cancel-anon" style="padding:8px 12px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:#fff">Batal</button>
+            <button type="submit" style="padding:8px 12px;border-radius:8px;border:none;background:var(--accent);color:#042226;font-weight:700">Kirim</button>
+          </div>
+        </form>
+      `;
+            openModal('Kirim Pesan Anonim', form);
+
+            // attach handlers after opening
+            setTimeout(() => {
+                const formEl = document.getElementById('anon-form');
+                if (!formEl) return;
+                formEl.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const msg = (new FormData(formEl)).get('msg');
+                    // di sini Anda bisa kirim pesan ke server; untuk demo kita simpan ke localStorage
+                    const storage = JSON.parse(localStorage.getItem('anon_msgs') || '[]');
+                    storage.push({
+                        msg,
+                        time: new Date().toISOString()
+                    });
+                    localStorage.setItem('anon_msgs', JSON.stringify(storage));
+                    openModal('Terima kasih', `<p style="margin:0 0 8px 0">Pesan anonim berhasil dikirim.</p><small style="opacity:0.8">(Disimpan di penyimpanan lokal demo)</small>`);
+                });
+                document.getElementById('cancel-anon').addEventListener('click', closeModal);
+            }, 60);
+        });
+
+        // gallery & schedule
+        document.getElementById('open-gallery').addEventListener('click', () => {
+                    // contoh gambar gallery small
+                    const imgs = [
+                        "https://vui.unsplash.com/resize?height=256&quality=60&type=auto&url=https%3A%2F%2Fsearched-images.s3.us-west-2.amazonaws.com%2F18408ced-0819-4a41-9628-9d5485fa47d0%3FX-Amz-Algorithm%3DAWS4-HMAC-SHA256%26X-Amz-Credential%3DAKIAQ4GRIA4QQ7L7GEOH%252F20251018%252Fus-west-2%252Fs3%252Faws4_request%26X-Amz-Date%3D20251018T110036Z%26X-Amz-Expires%3D86400%26X-Amz-SignedHeaders%3Dhost%26X-Amz-Signature%3Dc19420aba7d53d4d26a2d070142ca13837c4638df0bed894f183b4573a22880b&sign=FvDZAGQxdEf2NN_MZ15nhiypeOzc40kU6-Iia5xiEUs",
+                        "https://vui.unsplash.com/resize?height=256&quality=60&type=auto&url=https%3A%2F%2Fsearched-images.s3.us-west-2.amazonaws.com%2F3275fe21-f8a6-47ed-8e4d-398eccbf6638%3FX-Amz-Algorithm%3DAWS4-HMAC-SHA256%26X-Amz-Credential%3DAKIAQ4GRIA4QQ7L7GEOH%252F20251018%252Fus-west-2%252Fs3%252Faws4_request%26X-Amz-Date%3D20251018T110434Z%26X-Amz-Expires%3D86400%26X-Amz-SignedHeaders%3Dhost%26X-Amz-Signature%3D9ff86a717cddc3cf938208e2b3aa585846251033fe93090a4497b43c9376ca4e&sign=mhA8qkvpHSwmQMW8ss4itR2_kli40L5lrdNodx6FsC0",
+                        "https://vui.unsplash.com/resize?height=256&quality=60&type=auto&url=https%3A%2F%2Fsearched-images.s3.us-west-2.amazonaws.com%2Faaf22a20-6f55-4fc8-9d04-0266df2669e4%3FX-Amz-Algorithm%3DAWS4-HMAC-SHA256%26X-Amz-Credential%3DAKIAQ4GRIA4QQ7L7GEOH%252F20251018%252Fus-west-2%252Fs3%252Faws4_request%26X-Amz-Date%3D20251018T110211Z%26X-Amz-Expires%3D86400%26X-Amz-SignedHeaders%3Dhost%26X-Amz-Signature%3Dcd476a9acbee2a502e731b2bac3f8ae0143b14fca0d6449f52ce71198726e83a&sign=gUIK77rTn-x4FcZGRd05xSHzs5o8K-PoPpTvBurW7Cw",
+
+                    ];
+                    const html = `<div style="display:flex;gap:8px;flex-wrap:wrap">${imgs.map(u=>`<a href="${u}" target="_blank" style="flex:1 1 30%"><img src="${u}" style="width:100%;border-radius:8px;display:block"></a>`).join('')}</div>`;
+      openModal('Gallery Kelas', html);
+    });
+
+    document.getElementById('open-schedule').addEventListener('click', ()=> {
+      const rows = schedule.map(s=>`<div style="padding:8px 0;border-bottom:1px dashed rgba(255,255,255,0.04)"><strong>${s.day}</strong><div style="opacity:0.9;margin-top:4px">${s.subjects}</div></div>`).join('');
+      openModal('Jadwal Pelajaran', `<div>${rows}</div>`);
+    });
+
+    // modal close
+    document.getElementById('modal-close').addEventListener('click', closeModal);
+    document.getElementById('modal-backdrop').addEventListener('click', (e)=> {
+      if(e.target.id === 'modal-backdrop') closeModal();
+    });
+
+    // keyboard accessible (Enter opens)
+    document.querySelectorAll('.card').forEach(el=>{
+      el.addEventListener('keydown', (e)=>{
+        if(e.key === 'Enter' || e.key === ' ') el.click();
+      });
+    });
+    </script>
+</body>
+
+</html>
