@@ -1,0 +1,210 @@
+:root {
+    --bg1: #2b2f6b;
+    --bg2: #0f3550;
+    --card: rgba(255, 255, 255, 0.06);
+    --accent: #2bd1c6;
+    --glass: rgba(255, 255, 255, 0.06);
+    --muted: rgba(255, 255, 255, 0.7);
+    --radius: 14px;
+    --pad: 16px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background: linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 100%);
+    color: #fff;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.phone {
+    width: 380px;
+    max-width: 96vw;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(0, 0, 0, 0.04));
+    border-radius: 28px;
+    padding: 18px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+
+header {
+    text-align: center;
+    padding: 4px 8px 12px 8px;
+}
+
+.grade {
+    font-weight: 700;
+    font-size: 32px;
+    letter-spacing: 2px;
+    margin: 0;
+}
+
+.school {
+    margin-top: 6px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    opacity: 0.95;
+}
+
+.banner {
+    margin: 12px 0;
+    border-radius: 14px;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+}
+
+.banner img {
+    width: 100%;
+    display: block;
+    height: 140px;
+    object-fit: cover;
+    filter: contrast(95%) saturate(110%);
+}
+
+.banner .overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.45));
+    text-align: center;
+    padding: 10px;
+}
+
+.banner .overlay h2 {
+    margin: 0;
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: 4px;
+}
+
+.banner .overlay p {
+    margin: 4px 0 0;
+    font-size: 12px;
+    letter-spacing: 4px;
+    opacity: 0.9;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 14px;
+}
+
+.card {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+    border-radius: 14px;
+    padding: 14px;
+    min-height: 84px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 6px 18px rgba(2, 6, 23, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    transition: transform .18s ease, box-shadow .18s ease;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+}
+
+.card .top {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.25);
+    flex-shrink: 0;
+}
+
+.title {
+    font-weight: 700;
+    font-size: 15px;
+    margin: 0;
+}
+
+.subtitle {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 6px;
+}
+
+.action {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    margin-top: 6px;
+}
+
+.bottom {
+    margin-top: 18px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.bottom .btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 14px;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+    border: none;
+}
+
+.bottom .center {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
+}
+
+@media (max-width:380px) {
+    .grade {
+        font-size: 28px;
+    }
+    .banner img {
+        height: 120px;
+    }
+}
